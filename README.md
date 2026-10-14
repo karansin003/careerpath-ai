@@ -230,6 +230,21 @@ You can verify all features locally using this step-by-step test plan:
 6. Click **Create Web Service**.
 7. Render will build the project and deploy it to a live public URL: `https://careerpath-ai-xxxx.onrender.com`.
 
+### Deploying to Vercel (1-Click Serverless Deployment)
+
+CareerPath AI is pre-configured for Vercel with [`vercel.json`](file:///Users/karankumar/Desktop/careerpath-ai/vercel.json) and [`api/index.js`](file:///Users/karankumar/Desktop/careerpath-ai/api/index.js).
+
+1. Go to [Vercel](https://vercel.com/) and click **"Add New Project"**.
+2. Select your imported GitHub repository: `karansin003/careerpath-ai`.
+3. In the project settings:
+   - **Framework Preset:** `Other` (detected automatically)
+   - **Root Directory:** `./`
+4. Under **Environment Variables**, add:
+   - Name: `GEMINI_API_KEY`
+   - Value: *(your Google Gemini API key)*
+5. Click **Deploy**.
+6. Vercel will deploy both the static frontend and the Express backend serverless function instantly to a `*.vercel.app` domain!
+
 ---
 
 ## 📚 Academic Deliverables Index

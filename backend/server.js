@@ -60,7 +60,7 @@ setInterval(() => {
       rateLimitMap.delete(ip);
     }
   }
-}, 5 * 60 * 1000);
+}, 5 * 60 * 1000).unref();
 
 // API Health Check
 app.get('/api/health', (req, res) => {
@@ -298,12 +298,16 @@ app.use((req, res) => {
   res.sendFile(path.join(frontendPath, 'index.html'));
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`====================================================`);
-  console.log(`🚀 CareerPath AI Server running on port ${PORT}`);
-  console.log(`👉 Local: http://localhost:${PORT}`);
-  console.log(`👉 Static frontend directory: ${frontendPath}`);
-  console.log(`👉 Gemini Key Status: ${process.env.GEMINI_API_KEY ? 'Configured ✅' : 'Not configured (using sample fallback) ⚠️'}`);
-  console.log(`====================================================`);
-});
+// Start Server if run directly
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`====================================================`);
+    console.log(`🚀 CareerPath AI Server running on port ${PORT}`);
+    console.log(`👉 Local: http://localhost:${PORT}`);
+    console.log(`👉 Static frontend directory: ${frontendPath}`);
+    console.log(`👉 Gemini Key Status: ${process.env.GEMINI_API_KEY ? 'Configured ✅' : 'Not configured (using sample fallback) ⚠️'}`);
+    console.log(`====================================================`);
+  });
+}
+
+module.exports = app;
