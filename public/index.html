@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerPath AI | AI-Powered Career Roadmap Assistant for Students</title>
+  <meta name="description" content="CareerPath AI empowers college students and fresh graduates to discover missing skills, generate personalized AI career roadmaps, take skill quizzes, and track learning milestones. Aligned with UN SDG 8.">
+  <meta name="keywords" content="CareerPath AI, AI career roadmap, IBM SkillsBuild, student career guide, skill mismatch, SDG 8, tech career paths">
+  <meta name="author" content="Karan Kumar">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Critical CSS to prevent oversized SVG / FOUC -->
+  <style>
+    svg { max-width: 100%; height: auto; }
+    .logo-icon { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; }
+    .logo-icon svg { width: 22px; height: 22px; }
+    .logo-icon.small { width: 32px; height: 32px; }
+    .logo-icon.small svg { width: 18px; height: 18px; }
+  </style>
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar: Academic Project & SDG 8 Alignment -->
+  <div class="announcement-bar" id="announcementBar">
+    <div class="announcement-content">
+      <span class="badge-mini">IBM SkillsBuild Masterclass 5</span>
+      <span>🎓 Academic Capstone Project &bull; Aligned with <strong>UN SDG 8: Decent Work & Economic Growth</strong></span>
+    </div>
+    <button class="announcement-close" id="closeAnnouncement" aria-label="Dismiss banner">&times;</button>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="brand-logo" id="brandLogo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">CareerPath<span class="accent-text">AI</span></span>
+          <span class="logo-subtitle">Student Career Accelerator</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Menu -->
+      <nav class="nav-links" id="navLinks" aria-label="Main Navigation">
+        <a href="#hero" class="nav-item">Overview</a>
+        <a href="#features" class="nav-item">Features</a>
+        <a href="#generator-section" class="nav-item">Roadmap Form</a>
+        <a href="#roadmap-display-section" class="nav-item" id="navRoadmapLink">Active Roadmap</a>
+        <a href="#quiz-section" class="nav-item">Skill Quiz</a>
+        <a href="#dashboard-section" class="nav-item">Dashboard</a>
+        <a href="#sdg-section" class="nav-item">SDG 8 Impact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="#generator-section" class="btn btn-primary btn-sm" id="navCtaBtn">
+          <span>Build Roadmap</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <nav class="mobile-nav" aria-label="Mobile Navigation">
+      <a href="#hero" class="mobile-item">Overview</a>
+      <a href="#features" class="mobile-item">Features</a>
+      <a href="#generator-section" class="mobile-item">Roadmap Form</a>
+      <a href="#roadmap-display-section" class="mobile-item">Active Roadmap</a>
+      <a href="#quiz-section" class="mobile-item">Skill Quiz</a>
+      <a href="#dashboard-section" class="mobile-item">Dashboard</a>
+      <a href="#sdg-section" class="mobile-item">SDG 8 Impact</a>
+      <a href="#generator-section" class="btn btn-primary" style="margin-top: 1rem;">Build My Career Roadmap</a>
+    </nav>
+  </div>
+
+  <main>
+    <!-- Feature A: Hero Section -->
+    <section class="hero-section" id="hero">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-badge">
+            <span class="pulse-indicator"></span>
+            <span>Next-Gen Career Intelligence for College Students</span>
+          </div>
+          <h1 class="hero-title">
+            Bridge the Skill-Job Mismatch with <span class="gradient-text">AI-Powered Roadmaps</span>
+          </h1>
+          <p class="hero-description">
+            Millions of college graduates face career uncertainty and industry skill gaps. 
+            <strong>CareerPath AI</strong> analyzes your background, identifies your missing skills, generates a customized weekly learning syllabus with free resources, and tracks your journey to employment.
+          </p>
+
+          <div class="hero-cta-group">
+            <a href="#generator-section" class="btn btn-primary btn-lg" id="heroCtaBtn">
+              <span>Build My Career Roadmap</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#how-it-works" class="btn btn-secondary btn-lg" id="heroSecondaryBtn">
+              <span>How It Works</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+            </a>
+          </div>
+
+          <!-- Quick Metrics Ribbon -->
+          <div class="hero-stats">
+            <div class="stat-item">
+              <span class="stat-value">100%</span>
+              <span class="stat-label">Free Open Learning</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-value">4 / 8 / 12</span>
+              <span class="stat-label">Week Flexible Tracks</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-value">SDG 8</span>
+              <span class="stat-label">Decent Work Alignment</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <span class="stat-value">Zero</span>
+              <span class="stat-label">Login Barrier (Local)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero Visual Showcase Card -->
+        <div class="hero-visual">
+          <div class="visual-card">
+            <div class="card-glass-header">
+              <div class="window-dots">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+              </div>
+              <span class="window-title">CareerPath AI Engine &bull; Gemini Powered</span>
+            </div>
+            <div class="visual-card-body">
+              <div class="mock-flow-step active">
+                <div class="step-num">1</div>
+                <div class="step-info">
+                  <strong>Career Profile Input</strong>
+                  <span>Degree &bull; Current Skills &bull; Goal</span>
+                </div>
+                <span class="step-tag success">Verified</span>
+              </div>
+              <div class="mock-flow-connector"></div>
+              <div class="mock-flow-step active">
+                <div class="step-num">2</div>
+                <div class="step-info">
+                  <strong>AI Skill Gap Analysis</strong>
+                  <span>Detecting industry mismatches</span>
+                </div>
+                <span class="step-tag highlight">Gemini 2.5</span>
+              </div>
+              <div class="mock-flow-connector"></div>
+              <div class="mock-flow-step active">
+                <div class="step-num">3</div>
+                <div class="step-info">
+                  <strong>Weekly Milestone Roadmap</strong>
+                  <span>Topics &bull; Projects &bull; Free Docs</span>
+                </div>
+                <span class="step-tag info">Structured</span>
+              </div>
+              <div class="mock-flow-connector"></div>
+              <div class="mock-flow-step">
+                <div class="step-num">4</div>
+                <div class="step-info">
+                  <strong>Interactive Quiz & Tracking</strong>
+                  <span>5 MCQs &bull; Dynamic % &bull; Local Storage</span>
+                </div>
+                <span class="step-tag pending">Progressive</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section features-section" id="features">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Comprehensive Student Toolkit</span>
+          <h2 class="section-title">Engineered to Accelerate Your Tech Career</h2>
+          <p class="section-desc">Everything college students need to move from academic theory to industry-ready software engineering careers.</p>
+        </div>
+
+        <div class="features-grid">
+          <!-- Card 1 -->
+          <div class="feature-card">
+            <div class="feature-icon bg-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <h3 class="feature-title">AI-Powered Skill Gap Analysis</h3>
+            <p class="feature-text">Dissects your existing academic syllabus against real industry requirements to isolate precisely what technologies you need to learn.</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="feature-card">
+            <div class="feature-icon bg-indigo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <h3 class="feature-title">Weekly Milestone Roadmaps</h3>
+            <p class="feature-text">Select 4, 8, or 12-week schedules broken down into digestible weekly themes, core topics, hands-on lab exercises, and capstone projects.</p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="feature-card">
+            <div class="feature-icon bg-emerald">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <h3 class="feature-title">Curated Free Resources</h3>
+            <p class="feature-text">Zero expensive paywalls. Direct links to industry documentation, official guides, W3C/MDN specs, FreeCodeCamp, and Kaggle courses.</p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="feature-card">
+            <div class="feature-icon bg-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <h3 class="feature-title">Career-Specific Skill Quizzes</h3>
+            <p class="feature-text">5 multiple-choice questions per career track with instant score calculations, percentage ratings, and detailed technical explanations for every option.</p>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="feature-card">
+            <div class="feature-icon bg-sky">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h3 class="feature-title">Interactive Progress Tracking</h3>
+            <p class="feature-text">Check off completed tasks in real time. Dynamic completion percentages, task counters, and recommended next tasks keep you accountable.</p>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="feature-card">
+            <div class="feature-icon bg-teal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3 class="feature-title">100% Privacy with LocalStorage</h3>
+            <p class="feature-text">No account creation or password needed. All roadmaps, scores, and checked tasks persist locally inside your browser session across page refreshes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section how-it-works-section" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Simple 4-Step Process</span>
+          <h2 class="section-title">How CareerPath AI Works</h2>
+          <p class="section-desc">Go from career uncertainty to a crystal-clear learning roadmap in under two minutes.</p>
+        </div>
+
+        <div class="steps-container">
+          <div class="step-card">
+            <div class="step-badge">Step 1</div>
+            <h3 class="step-heading">Provide Your Profile</h3>
+            <p class="step-description">Enter your current academic degree, existing skills, target career goal, and available daily study time.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-badge">Step 2</div>
+            <h3 class="step-heading">AI Analyzes & Generates</h3>
+            <p class="step-description">Gemini AI synthesizes your background against industry expectations and prepares a week-by-week curriculum.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-badge">Step 3</div>
+            <h3 class="step-heading">Execute Milestones & Projects</h3>
+            <p class="step-description">Study curated free tutorials, complete hands-on coding exercises, and build resume-ready projects each week.</p>
+          </div>
+
+          <div class="step-card">
+            <div class="step-badge">Step 4</div>
+            <h3 class="step-heading">Quiz, Track & Launch</h3>
+            <p class="step-description">Take career quizzes to validate knowledge, mark tasks complete, observe your progress dashboard, and prepare for interviews.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Real-Time Dynamic Dashboard Section (Feature F) -->
+    <section class="section dashboard-section" id="dashboard-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Real Data Telemetry</span>
+          <h2 class="section-title">Learning Progress Dashboard</h2>
+          <p class="section-desc">Track real-time learning metrics, active career milestones, and quiz performances directly from your browser session.</p>
+        </div>
+
+        <div class="dashboard-wrapper">
+          <!-- Active Career Banner -->
+          <div class="dashboard-banner">
+            <div class="banner-info">
+              <span class="banner-label">Active Career Pathway</span>
+              <h3 class="banner-career" id="dashCareerName">No Roadmap Generated Yet</h3>
+              <p class="banner-meta" id="dashCareerMeta">Fill out the form below to generate your personalized AI career roadmap.</p>
+            </div>
+            <div class="banner-actions">
+              <a href="#generator-section" class="btn btn-primary btn-sm" id="dashNewRoadmapBtn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <span>New Roadmap</span>
+              </a>
+              <button class="btn btn-outline-danger btn-sm" id="dashResetBtn" title="Reset all saved progress in localStorage">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+                <span>Reset All</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Key Metrics Grid -->
+          <div class="metrics-grid">
+            <!-- Metric 1: Overall Progress -->
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Overall Progress</span>
+                <span class="metric-icon bg-blue">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                </span>
+              </div>
+              <div class="metric-value-row">
+                <span class="metric-large-num" id="dashProgressPct">0%</span>
+                <span class="metric-subtext" id="dashProgressRatio">0 / 0 Tasks</span>
+              </div>
+              <div class="progress-bar-track">
+                <div class="progress-bar-fill" id="dashProgressBar" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <!-- Metric 2: Completed Tasks -->
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Completed Tasks</span>
+                <span class="metric-icon bg-emerald">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+              </div>
+              <div class="metric-value-row">
+                <span class="metric-large-num text-success" id="dashCompletedTasks">0</span>
+                <span class="metric-subtext">Verified Milestones</span>
+              </div>
+              <span class="metric-footnote">Tasks completed and saved locally</span>
+            </div>
+
+            <!-- Metric 3: Pending Tasks -->
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Pending Tasks</span>
+                <span class="metric-icon bg-amber">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                </span>
+              </div>
+              <div class="metric-value-row">
+                <span class="metric-large-num text-warning" id="dashPendingTasks">0</span>
+                <span class="metric-subtext">Remaining to master</span>
+              </div>
+              <span class="metric-footnote">Scheduled across weekly modules</span>
+            </div>
+
+            <!-- Metric 4: Latest Quiz Score -->
+            <div class="metric-card">
+              <div class="metric-header">
+                <span class="metric-title">Latest Skill Quiz</span>
+                <span class="metric-icon bg-purple">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </span>
+              </div>
+              <div class="metric-value-row">
+                <span class="metric-large-num text-purple" id="dashQuizScore">N/A</span>
+                <span class="metric-subtext" id="dashQuizPct">Take Quiz Below</span>
+              </div>
+              <a href="#quiz-section" class="metric-link" id="dashTakeQuizLink">Go to Skill Quiz &rarr;</a>
+            </div>
+          </div>
+
+          <!-- Recommended Next Task Card -->
+          <div class="next-task-card" id="dashNextTaskCard">
+            <div class="next-task-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </div>
+            <div class="next-task-body">
+              <span class="next-task-tag">Recommended Next Action</span>
+              <h4 class="next-task-title" id="dashNextTaskTitle">Generate a roadmap to start learning</h4>
+              <p class="next-task-desc" id="dashNextTaskDesc">Your roadmap tasks will appear here dynamically to guide your daily study routine.</p>
+            </div>
+            <div class="next-task-action">
+              <button class="btn btn-secondary btn-sm" id="dashJumpToTaskBtn" disabled>
+                <span>Jump to Task</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Local Storage Privacy Notice -->
+          <div class="storage-notice">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span><strong>Client-Side Storage Note:</strong> Your learning progress, task checkmarks, and quiz scores are saved exclusively in your current browser's <code>localStorage</code>. Data is not transmitted or synchronized between different devices or browsers.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature B: Career Profile Form -->
+    <section class="section generator-section" id="generator-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Personalized Configuration</span>
+          <h2 class="section-title">Build Your Career Roadmap</h2>
+          <p class="section-desc">Tell us about your educational background and career aspirations to generate an industry-aligned learning pathway.</p>
+        </div>
+
+        <div class="form-wrapper">
+          <!-- Prefill Bar for Rapid Demo/Viva Evaluation -->
+          <div class="demo-prefill-bar">
+            <span>✨ Fast Viva Demonstration:</span>
+            <button type="button" class="btn-chip" id="prefillFullStack">Web Developer (B.Tech)</button>
+            <button type="button" class="btn-chip" id="prefillDataScience">Data Scientist (BCA)</button>
+            <button type="button" class="btn-chip" id="prefillDevOps">DevOps (B.Sc IT)</button>
+            <button type="button" class="btn-chip" id="prefillCyber">Cybersecurity (Student)</button>
+          </div>
+
+          <form id="careerProfileForm" novalidate>
+            <!-- Form Grid -->
+            <div class="form-grid">
+              <!-- Field: Name (Optional) -->
+              <div class="form-group">
+                <label for="userName" class="form-label">
+                  Full Name <span class="label-optional">(Optional)</span>
+                </label>
+                <input type="text" id="userName" name="userName" class="form-input" placeholder="e.g. Alex Johnson" maxlength="100">
+                <span class="form-hint">Used to personalize your roadmap certificate & summary.</span>
+              </div>
+
+              <!-- Field: Degree / Academic Course -->
+              <div class="form-group">
+                <label for="userDegree" class="form-label">
+                  Academic Degree / Course <span class="label-required">*</span>
+                </label>
+                <input type="text" id="userDegree" name="userDegree" class="form-input" placeholder="e.g. B.Tech Computer Science, BCA, B.Sc IT" maxlength="100" required>
+                <span class="form-error" id="userDegreeError">Please enter your degree or current academic program.</span>
+              </div>
+
+              <!-- Field: Current Skills -->
+              <div class="form-group full-width">
+                <label for="userSkills" class="form-label">
+                  Current Skills & Technologies Known <span class="label-required">*</span>
+                </label>
+                <textarea id="userSkills" name="userSkills" class="form-textarea" rows="2" placeholder="e.g. Basic C++, HTML, CSS, elementary Python, Git basics" maxlength="500" required></textarea>
+                <span class="form-hint">List programming languages, tools, or concepts you have studied so far (separated by commas).</span>
+                <span class="form-error" id="userSkillsError">Please provide your current skills so AI can identify missing gaps.</span>
+              </div>
+
+              <!-- Field: Target Career Goal -->
+              <div class="form-group">
+                <label for="targetCareer" class="form-label">
+                  Target Career Role <span class="label-required">*</span>
+                </label>
+                <select id="targetCareer" name="targetCareer" class="form-select" required>
+                  <option value="" disabled selected>-- Select Your Target Career --</option>
+                  <option value="Full Stack Web Developer">Full Stack Web Developer</option>
+                  <option value="Data Scientist / AI Engineer">Data Scientist / AI Engineer</option>
+                  <option value="Cloud & DevOps Engineer">Cloud & DevOps Engineer</option>
+                  <option value="Cybersecurity Analyst">Cybersecurity Analyst</option>
+                  <option value="Mobile App Developer (Flutter/Android)">Mobile App Developer (Flutter/Android)</option>
+                  <option value="UI/UX Designer & Frontend">UI/UX Designer & Frontend</option>
+                  <option value="custom">Other / Custom Career Path...</option>
+                </select>
+                <span class="form-error" id="targetCareerError">Please select a target career path.</span>
+              </div>
+
+              <!-- Field: Custom Career Input (Conditional) -->
+              <div class="form-group" id="customCareerGroup" style="display: none;">
+                <label for="customCareer" class="form-label">
+                  Specify Custom Career <span class="label-required">*</span>
+                </label>
+                <input type="text" id="customCareer" name="customCareer" class="form-input" placeholder="e.g. Blockchain Developer, Embedded Systems Engineer" maxlength="100">
+                <span class="form-error" id="customCareerError">Please specify your custom career title.</span>
+              </div>
+
+              <!-- Field: Experience Level -->
+              <div class="form-group">
+                <label for="experienceLevel" class="form-label">
+                  Current Experience Level <span class="label-required">*</span>
+                </label>
+                <select id="experienceLevel" name="experienceLevel" class="form-select" required>
+                  <option value="Beginner / 1st-2nd Year Student" selected>Beginner / 1st-2nd Year College Student</option>
+                  <option value="Intermediate / 3rd-4th Year Student">Intermediate / Final Year College Student</option>
+                  <option value="Fresh Graduate / Entry-Level Seeker">Fresh Graduate / Job Seeker</option>
+                  <option value="Career Switcher / Non-CS Background">Career Switcher (Non-CS Background)</option>
+                </select>
+              </div>
+
+              <!-- Field: Daily Study Time -->
+              <div class="form-group">
+                <label for="dailyStudyTime" class="form-label">
+                  Daily Dedicated Study Time <span class="label-required">*</span>
+                </label>
+                <select id="dailyStudyTime" name="dailyStudyTime" class="form-select" required>
+                  <option value="1-2 Hours/Day (Light / Exam Prep)">1 - 2 Hours / Day (Moderate / Working with College)</option>
+                  <option value="2-4 Hours/Day (Recommended Balanced)" selected>2 - 4 Hours / Day (Recommended Balanced)</option>
+                  <option value="4+ Hours/Day (Intensive Bootcamp)">4+ Hours / Day (Intensive Full-Time Preparation)</option>
+                </select>
+              </div>
+
+              <!-- Field: Roadmap Duration -->
+              <div class="form-group">
+                <label class="form-label">
+                  Roadmap Duration <span class="label-required">*</span>
+                </label>
+                <div class="radio-pill-group">
+                  <label class="radio-pill">
+                    <input type="radio" name="durationWeeks" value="4" checked>
+                    <span class="pill-label">
+                      <strong>4 Weeks</strong>
+                      <small>Sprint Track</small>
+                    </span>
+                  </label>
+                  <label class="radio-pill">
+                    <input type="radio" name="durationWeeks" value="8">
+                    <span class="pill-label">
+                      <strong>8 Weeks</strong>
+                      <small>Standard Track</small>
+                    </span>
+                  </label>
+                  <label class="radio-pill">
+                    <input type="radio" name="durationWeeks" value="12">
+                    <span class="pill-label">
+                      <strong>12 Weeks</strong>
+                      <small>Mastery Track</small>
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button & Form Feedback -->
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary btn-lg btn-submit" id="generateRoadmapBtn">
+                <span class="btn-text">Generate AI Career Roadmap</span>
+                <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <span class="spinner" id="formSpinner" style="display: none;"></span>
+              </button>
+              <button type="button" class="btn btn-secondary btn-lg" id="clearFormBtn">Clear Form</button>
+            </div>
+
+            <div class="form-alert" id="formGlobalAlert" style="display: none;"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Loading State Screen (Dynamic Status Progress) -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+      <div class="loading-modal">
+        <div class="loading-spinner-ring"></div>
+        <h3 class="loading-title" id="loadingTitle">Analyzing Career Trajectory...</h3>
+        <p class="loading-subtitle" id="loadingSubtitle">Consulting Google Gemini AI model to bridge your academic skills with industry standards.</p>
+        <div class="loading-steps">
+          <div class="loading-step-item active" id="lStep1">
+            <span class="l-dot"></span>
+            <span>Evaluating degree & current capabilities</span>
+          </div>
+          <div class="loading-step-item" id="lStep2">
+            <span class="l-dot"></span>
+            <span>Detecting technical skill gaps</span>
+          </div>
+          <div class="loading-step-item" id="lStep3">
+            <span class="l-dot"></span>
+            <span>Synthesizing weekly milestones & projects</span>
+          </div>
+          <div class="loading-step-item" id="lStep4">
+            <span class="l-dot"></span>
+            <span>Gathering verified free documentation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature C: AI Career Roadmap Display Section -->
+    <section class="section roadmap-display-section" id="roadmap-display-section">
+      <div class="container">
+        <!-- Roadmap Controls & Banner -->
+        <div class="roadmap-result-header" id="roadmapResultHeader" style="display: none;">
+          <div class="result-title-group">
+            <div class="result-badge-row">
+              <span class="source-badge" id="roadmapSourceBadge">AI Generated</span>
+              <span class="duration-badge" id="roadmapDurationBadge">4 Weeks</span>
+            </div>
+            <h2 class="result-career-title" id="roadmapCareerTitle">Full Stack Web Developer Roadmap</h2>
+            <p class="result-candidate-info" id="roadmapCandidateInfo">Prepared for Alex &bull; B.Tech CSE &bull; Beginner</p>
+          </div>
+          <div class="result-actions">
+            <button class="btn btn-secondary btn-sm" id="printRoadmapBtn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+              <span>Print / Save PDF</span>
+            </button>
+            <a href="#quiz-section" class="btn btn-primary btn-sm" id="jumpToQuizBtn">
+              <span>Take Skill Quiz</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Sample Disclaimer Banner (Displayed when isSample is true) -->
+        <div class="sample-notice-banner" id="sampleNoticeBanner" style="display: none;">
+          <div class="sample-notice-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="sample-notice-content">
+            <strong>Academic Curated Sample Roadmap:</strong>
+            <span id="sampleNoticeText">Displaying a predefined high-quality sample roadmap because the Gemini API key is not configured in backend environment variables. All tracking, tasks, and quizzes work seamlessly.</span>
+          </div>
+        </div>
+
+        <!-- Empty State (Before Generation) -->
+        <div class="empty-state-card" id="roadmapEmptyState">
+          <div class="empty-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <h3 class="empty-title">Your Career Roadmap Will Appear Here</h3>
+          <p class="empty-text">Fill out your degree, current skills, and target career in the form above, or click one of the quick viva demo chips to generate your learning path instantly.</p>
+          <a href="#generator-section" class="btn btn-primary">Go to Form</a>
+        </div>
+
+        <!-- Roadmap Content Container (Rendered by JS) -->
+        <div class="roadmap-content" id="roadmapContent" style="display: none;">
+          <!-- Skills Gap Matrix -->
+          <div class="skills-matrix-grid">
+            <div class="skills-card existing-skills">
+              <div class="skills-card-header">
+                <span class="skills-icon bg-emerald">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                </span>
+                <div>
+                  <h4 class="skills-title">Recognized Existing Skills</h4>
+                  <span class="skills-subtitle">Skills you currently possess</span>
+                </div>
+              </div>
+              <div class="skills-tag-list" id="existingSkillsList">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <div class="skills-card missing-skills">
+              <div class="skills-card-header">
+                <span class="skills-icon bg-blue">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                </span>
+                <div>
+                  <h4 class="skills-title">Target Missing Skills to Learn</h4>
+                  <span class="skills-subtitle">Identified industry prerequisites</span>
+                </div>
+              </div>
+              <div class="skills-tag-list" id="missingSkillsList">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Career Overview & Industry Outlook -->
+          <div class="career-meta-grid">
+            <div class="meta-card">
+              <h4 class="meta-card-title">Role Overview & Responsibilities</h4>
+              <p class="meta-card-text" id="roadmapRoleOverview"></p>
+            </div>
+            <div class="meta-card">
+              <h4 class="meta-card-title">Market Demand & Industry Outlook</h4>
+              <p class="meta-card-text" id="roadmapIndustryOutlook"></p>
+            </div>
+          </div>
+
+          <!-- Weekly Timeline Modules -->
+          <div class="weekly-timeline-header">
+            <h3 class="timeline-title">Weekly Learning Syllabus & Milestones</h3>
+            <span class="timeline-helper">Click each week to expand/collapse. Check off tasks as you finish them to update your progress!</span>
+          </div>
+
+          <div class="timeline-container" id="weeksTimelineContainer">
+            <!-- Injected dynamically via JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature D: Skill Quiz Section -->
+    <section class="section quiz-section" id="quiz-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Knowledge Validation</span>
+          <h2 class="section-title">Career Skill Quiz</h2>
+          <p class="section-desc">Assess your conceptual understanding with 5 industry-relevant multiple-choice questions tailored to your chosen career path.</p>
+        </div>
+
+        <div class="quiz-container">
+          <!-- Quiz Career Selector Header -->
+          <div class="quiz-top-bar">
+            <div class="quiz-career-info">
+              <span class="quiz-label">Quiz Topic:</span>
+              <strong class="quiz-topic-name" id="quizTopicName">Full Stack Web Developer</strong>
+            </div>
+            <div class="quiz-controls">
+              <button class="btn btn-secondary btn-sm" id="retakeQuizBtn">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+                <span>Reset & Retake</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Quiz Score Summary Banner (Shown after grading) -->
+          <div class="quiz-score-banner" id="quizScoreBanner" style="display: none;">
+            <div class="score-circle" id="scoreCircle">
+              <span class="score-number" id="scoreNum">0/5</span>
+            </div>
+            <div class="score-details">
+              <h4 class="score-title" id="scoreTitle">Quiz Completed!</h4>
+              <p class="score-desc" id="scoreDesc">Review the answer explanations below to solidify your understanding.</p>
+              <div class="score-badges">
+                <span class="badge-pill bg-blue" id="scorePctBadge">0% Score</span>
+                <span class="badge-pill bg-emerald">Saved to Local Dashboard</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quiz Questions List Container -->
+          <div class="quiz-questions-list" id="quizQuestionsList">
+            <!-- Injected dynamically by JS -->
+          </div>
+
+          <!-- Quiz Submit Button -->
+          <div class="quiz-submit-row">
+            <button class="btn btn-primary btn-lg" id="submitQuizBtn">
+              <span>Submit & Evaluate Quiz</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature E: Progress Tracker & Task Management Section -->
+    <section class="section progress-section" id="progress-section">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Execution & Accountability</span>
+          <h2 class="section-title">Milestone Task Tracker</h2>
+          <p class="section-desc">Mark tasks as you study each topic. Watch your completion percentage advance in real time.</p>
+        </div>
+
+        <div class="tracker-wrapper">
+          <!-- Filter Tabs -->
+          <div class="tracker-filters">
+            <button class="filter-tab active" data-filter="all" id="filterAllTasks">All Tasks (<span id="countAll">0</span>)</button>
+            <button class="filter-tab" data-filter="pending" id="filterPendingTasks">Pending (<span id="countPending">0</span>)</button>
+            <button class="filter-tab" data-filter="completed" id="filterCompletedTasks">Completed (<span id="countCompleted">0</span>)</button>
+          </div>
+
+          <!-- Task List -->
+          <div class="tracker-list" id="trackerTaskList">
+            <!-- Injected dynamically via JS -->
+            <div class="tracker-empty">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <p>No roadmap tasks generated yet. Generate a roadmap above to begin tracking milestones.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UN SDG 8 Section -->
+    <section class="section sdg-section" id="sdg-section">
+      <div class="container">
+        <div class="sdg-container">
+          <div class="sdg-header">
+            <div class="sdg-wheel-badge">
+              <span class="sdg-num">8</span>
+              <span class="sdg-title-tag">UN SDG</span>
+            </div>
+            <div>
+              <span class="section-subtitle">Academic Project Alignment</span>
+              <h2 class="section-title">UN Sustainable Development Goal 8</h2>
+              <p class="sdg-lead">Promote sustained, inclusive, and sustainable economic growth, full and productive employment, and decent work for all.</p>
+            </div>
+          </div>
+
+          <div class="sdg-grid">
+            <div class="sdg-card">
+              <div class="sdg-target-badge">SDG Target 8.6</div>
+              <h3 class="sdg-card-title">Youth Employment & Training</h3>
+              <p class="sdg-card-desc">
+                By substantially reducing the proportion of youth not in employment, education, or training (NEET). CareerPath AI provides free, democratized career pathways to bridge college curricula with modern tech industry hiring criteria.
+              </p>
+            </div>
+
+            <div class="sdg-card">
+              <div class="sdg-target-badge">SDG Target 8.5</div>
+              <h3 class="sdg-card-title">Decent Work for All Graduates</h3>
+              <p class="sdg-card-desc">
+                Empowering students from tier-2 and tier-3 colleges, self-taught coders, and career switchers to acquire high-value software engineering skills without expensive bootcamps or barriers.
+              </p>
+            </div>
+
+            <div class="sdg-card">
+              <div class="sdg-target-badge">SDG Target 4.4 & 8.2</div>
+              <h3 class="sdg-card-title">Economic Productivity & Tech Skills</h3>
+              <p class="sdg-card-desc">
+                Achieving higher levels of economic productivity through technological upgrading and innovation, fostering relevant technical and vocational competencies for productive employment.
+              </p>
+            </div>
+          </div>
+
+          <div class="sdg-callout">
+            <div class="sdg-callout-icon">💡</div>
+            <div class="sdg-callout-text">
+              <strong>Academic Alignment Note:</strong> This project directly attacks the <em>skill-job mismatch paradox</em>: companies struggle to hire qualified technical talent while millions of college engineering graduates remain underemployed due to outdated theoretical curricula.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer" id="footer">
+    <div class="container footer-container">
+      <div class="footer-col brand-col">
+        <div class="footer-logo">
+          <div class="logo-icon small">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          </div>
+          <span class="footer-title">CareerPath<span class="accent-text">AI</span></span>
+        </div>
+        <p class="footer-desc">
+          An AI-powered career roadmap assistant designed for college students and recent graduates. Built for IBM SkillsBuild Masterclass 5.
+        </p>
+        <div class="footer-badges">
+          <span class="badge-tag">UN SDG 8</span>
+          <span class="badge-tag">IBM SkillsBuild</span>
+          <span class="badge-tag">MIT License</span>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Platform Features</h4>
+        <ul class="footer-links">
+          <li><a href="#hero">Overview & Impact</a></li>
+          <li><a href="#generator-section">Roadmap Generator</a></li>
+          <li><a href="#roadmap-display-section">Weekly Milestones</a></li>
+          <li><a href="#quiz-section">Career Skill Quizzes</a></li>
+          <li><a href="#dashboard-section">Learning Dashboard</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Academic Deliverables</h4>
+        <ul class="footer-links">
+          <li><a href="#" class="modal-trigger" data-modal="modalAbout">About Project</a></li>
+          <li><a href="#" class="modal-trigger" data-modal="modalConcept">Concept Note Summary</a></li>
+          <li><a href="#" class="modal-trigger" data-modal="modalLeanCanvas">Lean Canvas Summary</a></li>
+          <li><a href="#" class="modal-trigger" data-modal="modalContact">Academic Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Policy & Privacy</h4>
+        <ul class="footer-links">
+          <li><a href="#" class="modal-trigger" data-modal="modalPrivacy">Privacy Policy</a></li>
+          <li><a href="#" class="modal-trigger" data-modal="modalDisclaimer">Academic Disclaimer</a></li>
+          <li><a href="#" class="modal-trigger" data-modal="modalStorage">LocalStorage Notice</a></li>
+          <li><a href="https://github.com" target="_blank" rel="noopener">GitHub Repository</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-container">
+        <p>&copy; 2026 CareerPath AI &bull; Built with HTML5, CSS3, Vanilla JavaScript, Node.js & Google Gemini API.</p>
+        <p class="viva-credit">Prepared for IBM SkillsBuild Masterclass 5 Academic Assessment &bull; UN SDG 8</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Confirmation Reset Modal -->
+  <div class="modal-backdrop" id="resetConfirmModal" style="display: none;">
+    <div class="modal-card">
+      <div class="modal-icon text-danger">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      </div>
+      <h3 class="modal-title">Reset All Learning Progress?</h3>
+      <p class="modal-text">Are you sure you want to clear your active roadmap, checked tasks, and quiz scores from your browser's <code>localStorage</code>? This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" id="cancelResetBtn">Cancel</button>
+        <button class="btn btn-danger" id="confirmResetBtn">Yes, Reset All Progress</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- General Academic Information Modals -->
+  <div class="modal-backdrop" id="infoModalBackdrop" style="display: none;">
+    <div class="modal-card modal-large">
+      <div class="modal-header">
+        <h3 class="modal-title" id="infoModalTitle">Academic Information</h3>
+        <button class="modal-close-btn" id="closeInfoModal">&times;</button>
+      </div>
+      <div class="modal-body" id="infoModalBody">
+        <!-- Content injected dynamically based on clicked link -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="dismissInfoModal">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="/script.js"></script>
+</body>
+</html>

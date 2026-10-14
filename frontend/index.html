@@ -13,8 +13,17 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
 
+  <!-- Critical CSS to prevent oversized SVG / FOUC -->
+  <style>
+    svg { max-width: 100%; height: auto; }
+    .logo-icon { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; }
+    .logo-icon svg { width: 22px; height: 22px; }
+    .logo-icon.small { width: 32px; height: 32px; }
+    .logo-icon.small svg { width: 18px; height: 18px; }
+  </style>
+
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
 
@@ -924,6 +933,6 @@
   </div>
 
   <!-- Main JavaScript File -->
-  <script src="script.js"></script>
+  <script src="/script.js"></script>
 </body>
 </html>

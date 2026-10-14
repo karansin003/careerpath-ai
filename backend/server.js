@@ -289,13 +289,18 @@ Required JSON format:
   }
 });
 
-// Serve frontend static files
+// Serve frontend static files (checks public directory first, then frontend directory)
+const fs = require('fs');
+const publicPath = path.join(__dirname, '../public');
 const frontendPath = path.join(__dirname, '../frontend');
+const staticPath = fs.existsSync(publicPath) ? publicPath : frontendPath;
+
+app.use(express.static(staticPath));
 app.use(express.static(frontendPath));
 
 // Fallback to index.html for SPA/client-side navigation
 app.use((req, res) => {
-  res.sendFile(path.join(frontendPath, 'index.html'));
+  res.sendFile(path.join(staticPath, 'index.html'));
 });
 
 // Start Server if run directly
