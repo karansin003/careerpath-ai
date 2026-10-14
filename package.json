@@ -1,0 +1,26 @@
+{
+  "name": "careerpath-ai",
+  "version": "1.0.0",
+  "description": "CareerPath AI: AI-Powered Career Roadmap Assistant for Students - IBM SkillsBuild Masterclass 5 Project",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js",
+    "postinstall": "cd backend && npm install"
+  },
+  "keywords": [
+    "careerpath-ai",
+    "roadmap",
+    "gemini-api",
+    "sdg8",
+    "ibm-skillsbuild"
+  ],
+  "author": "Karan Kumar",
+  "license": "MIT",
+  "dependencies": {
+    "@google/genai": "^0.1.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
